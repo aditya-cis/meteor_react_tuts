@@ -1,20 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default class PostList extends React.Component {
     constructor() {
         super();
-        this.state = {posts: null};
+        this.state = { posts: null };
     }
 
     componentDidMount() {
         Meteor.call('post.list', (err, posts) => {
-            this.setState({posts});
+            this.setState({ posts });
         });
     }
 
     render() {
-        const {posts} = this.state;
-        const {history} = this.props;
+        const { posts } = this.state;
+        const { history } = this.props;
 
         if (!posts) {
             return <div>Loading....</div>
@@ -27,7 +28,8 @@ export default class PostList extends React.Component {
                         return (
                             <div key={post._id}>
                                 <p>Post id: {post._id} </p>
-                                <p>Post title: {post.title}, Post Description: {post.description} </p>
+                                <p>Post title: <Link to={`/posts/view/${post._id}`}>{post.title}</Link></p>
+                                <p>Post Description: {post.description} </p>
                                 <button onClick={() => {
                                     history.push("/posts/edit/" + post._id)
                                 }}> Edit post

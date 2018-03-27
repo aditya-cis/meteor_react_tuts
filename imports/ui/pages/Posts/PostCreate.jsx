@@ -21,13 +21,8 @@ export default class PostCreate extends React.Component {
 
         return (
             <div className="post">
-                <AutoForm onSubmit={this.submit} schema={PostSchema}>
-                    <AutoField name="title"/>
-                    <LongTextField name="description"/>
-
-                    <button type='submit'>Add post</button>
-                    <button onClick={() => history.push('/posts')}>Back to posts</button>
-                </AutoForm>
+                <AutoForm onSubmit={this.submit} schema={PostSchema} />
+                <button onClick={() => history.push('/posts')}>Back to posts</button>
             </div>
         )
     }
